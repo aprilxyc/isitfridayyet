@@ -1,0 +1,22 @@
+{
+  "name": "isit2022yet",
+  "version": "1.0.0",
+  "description": "Tired of lockdowns, is it 2022 yet?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "prebuild": "rm -rf dist"
+  },
+  "author": "April chi",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
