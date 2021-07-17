@@ -36,4 +36,4 @@ typings/
 
 .env
 
-.cache
+.cache/

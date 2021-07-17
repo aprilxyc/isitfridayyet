@@ -41,12 +41,12 @@ const LandingPage = () => {
     const [isFriday, setIsFriday] = useState(false)
 
     useEffect(() => {
-        const callAPI = async () => {
-            fetch('http://localhost:9000/testAPI')
-                .then((res) => res.text())
-                .then((res) => setAPIresponse(res))
-        }
-        callAPI()
+        // const callAPI = async () => {
+        //     fetch('http://localhost:9000/testAPI')
+        //         .then((res) => res.text())
+        //         .then((res) => setAPIresponse(res))
+        // }
+        // callAPI()
         setInterval(() => {
             let timeUntilFriday = formatDateToWords()
             if (
