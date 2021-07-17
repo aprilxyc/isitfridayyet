@@ -14,6 +14,7 @@ type mousePositionState = {
 
 const formatDateToWords = () => {
     let today = new Date()
+    // this is just for testing purposes
     let todaysDate: Date = new Date(
         today.getFullYear(),
         today.getMonth(),
@@ -44,7 +45,6 @@ const formatDateToWords = () => {
 }
 
 const LandingPage = () => {
-    const [apiResponse, setAPIresponse] = useState<string>('')
     const [countdown, setCountdown] = useState<string>('')
     const [isFriday, setIsFriday] = useState<boolean>(false)
     const [mousePosition, setMousePosition] = useState<mousePositionState>({
@@ -52,27 +52,13 @@ const LandingPage = () => {
         y: 0,
     })
 
-    const calculateTransformCoords = (mouseCoordinates) => {
-        return `translate(${mouseCoordinates.x}), ${mouseCoordinates.y}px`
+    const updateMousePosition = (mouseEvent: MouseEvent) => {
+        setMousePosition({ x: mouseEvent.pageX, y: mouseEvent.pageY })
     }
-    console.log(
-        window.addEventListener('mousemove', (e) => console.log('potato', e))
-    )
 
     useEffect(() => {
-        // const callAPI = async () => {
-        //     fetch('http://localhost:9000/testAPI')
-        //         .then((res) => res.text())
-        //         .then((res) => setAPIresponse(res))
-        // }
-        // callAPI()
-
-        const updateMousePosition = (e) => {
-            setMousePosition({ x: e.pageX, y: e.pageY })
-        }
-
-        window.addEventListener('mousemove', (e) => {
-            updateMousePosition(e)
+        window.addEventListener('mousemove', (mouseEvent: MouseEvent) => {
+            updateMousePosition(mouseEvent)
         })
 
         setInterval(() => {
@@ -91,13 +77,13 @@ const LandingPage = () => {
 
         return () =>
             window.removeEventListener('mousemove', updateMousePosition)
-    })
+    }, [])
 
     return (
         <div className="landing-page">
             <CursorEventListener mouseCoords={mousePosition} />
-            <h1>NO</h1>
-            <div>{isFriday ? 'ITS FRIDAY' : countdown}</div>
+            <h1>{isFriday ? 'YES!' : 'NO'}</h1>
+            <div>{isFriday ? "IT'S FRIDAY" : countdown}</div>
         </div>
     )
 }

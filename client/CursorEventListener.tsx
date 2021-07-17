@@ -1,16 +1,19 @@
 import * as React from 'react'
 
-const CursorEventListener = (mouseCoords) => {
-    console.log(
-        mouseCoords.mouseCoords,
-        `translate(${mouseCoords.mouseCoords.x}px, translate${mouseCoords.mouseCoords.y}px)`
-    )
+const CursorEventListener = (props) => {
+    const { x, y } = props.mouseCoords
+    console.log(x, y)
+
+    const calculateTransformCoords = (xCoord, yCoord) => {
+        return `translate(${xCoord}px, ${yCoord}px)`
+    }
+
     return (
         <div>
             <span
                 className="cursor"
                 style={{
-                    transform: `translate(${mouseCoords.mouseCoords.x}px, ${mouseCoords.mouseCoords.y}px)`,
+                    transform: calculateTransformCoords(x, y),
                 }}
             >
                 🍐
