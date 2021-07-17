@@ -12,7 +12,7 @@
 
 body {
     height: 100%;
-    background-color: #F9F4DE;
+    background-color: #f9f4de;
 }
 
 .container {
@@ -26,6 +26,11 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 40px;
+}
+
+.cursor {
+    position: absolute;
+    background-color: rebeccapurple;
 }
 
 /* .app-page {
@@ -43,4 +48,3 @@ body {
     justify-content: center;
     align-items: center;
 } */
-

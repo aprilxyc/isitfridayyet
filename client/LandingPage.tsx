@@ -4,6 +4,14 @@ import nextFriday from 'date-fns/nextFriday'
 import formatDuration from 'date-fns/formatDuration'
 import intervalToDuration from 'date-fns/intervalToDuration'
 
+// react components
+import CursorEventListener from './CursorEventListener'
+
+type mousePositionState = {
+    x: number
+    y: number
+}
+
 const formatDateToWords = () => {
     let today = new Date()
     let todaysDate: Date = new Date(
@@ -36,9 +44,20 @@ const formatDateToWords = () => {
 }
 
 const LandingPage = () => {
-    const [apiResponse, setAPIresponse] = useState('')
-    const [countdown, setCountdown] = useState('')
-    const [isFriday, setIsFriday] = useState(false)
+    const [apiResponse, setAPIresponse] = useState<string>('')
+    const [countdown, setCountdown] = useState<string>('')
+    const [isFriday, setIsFriday] = useState<boolean>(false)
+    const [mousePosition, setMousePosition] = useState<mousePositionState>({
+        x: 0,
+        y: 0,
+    })
+
+    const calculateTransformCoords = (mouseCoordinates) => {
+        return `translate(${mouseCoordinates.x}), ${mouseCoordinates.y}px`
+    }
+    console.log(
+        window.addEventListener('mousemove', (e) => console.log('potato', e))
+    )
 
     useEffect(() => {
         // const callAPI = async () => {
@@ -47,13 +66,21 @@ const LandingPage = () => {
         //         .then((res) => setAPIresponse(res))
         // }
         // callAPI()
+
+        const updateMousePosition = (e) => {
+            setMousePosition({ x: e.pageX, y: e.pageY })
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            updateMousePosition(e)
+        })
+
         setInterval(() => {
             let timeUntilFriday = formatDateToWords()
             if (
                 timeUntilFriday.startsWith('6 days') ||
                 timeUntilFriday.startsWith('7 days')
             ) {
-                console.log('ITS FRIDAY!')
                 setIsFriday(true)
             } else {
                 setIsFriday(false)
@@ -61,10 +88,14 @@ const LandingPage = () => {
 
             setCountdown(timeUntilFriday)
         }, 500)
-    }, [])
+
+        return () =>
+            window.removeEventListener('mousemove', updateMousePosition)
+    })
 
     return (
         <div className="landing-page">
+            <CursorEventListener mouseCoords={mousePosition} />
             <h1>NO</h1>
             <div>{isFriday ? 'ITS FRIDAY' : countdown}</div>
         </div>
