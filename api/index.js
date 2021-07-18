@@ -14,7 +14,6 @@ const io = require('socket.io')(server, {
 })
 
 // cors
-
 io.on('connection', (socket) => {
     console.log('a user has connected', socket)
 })

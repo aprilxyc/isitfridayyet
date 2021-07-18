@@ -8,6 +8,7 @@
     font-size: 16px;
     font-family: 'Domine', serif;
     font-weight: 600;
+    cursor: none;
 }
 
 body {
@@ -31,7 +32,7 @@ body {
 
 .cursor {
     position: absolute;
-    background-color: rebeccapurple;
+    transition: transform 50ms ease-in;
 }
 
 /* .app-page {
